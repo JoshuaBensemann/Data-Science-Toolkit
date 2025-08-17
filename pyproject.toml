@@ -2,7 +2,7 @@
         name = "datascience_toolkit"
         version = "0.1.0"
         description = "All of my datascience tools in one place"
-        requires-python = ">=3.13"
+        requires-python = ">=3.10"
         dependencies = [
             "pandas",
             "scikit-learn",
