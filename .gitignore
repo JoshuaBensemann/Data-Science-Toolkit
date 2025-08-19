@@ -1,2 +1,3 @@
 *datascience_toolkit.egg-info
-
+*notebooks
+*.pyc
