@@ -15,7 +15,5 @@ def create_time_series(
         if row[time_col] < max_days + max_days_offset:
             time_series[row[time_col]] = row[value_col]
 
-    time_series = pd.Series(
-        time_series[min_days : max_days + 1], index=range(min_days, max_days + 1)
-    )
-    return time_series.interpolate(method="linear")[min_days : max_days + 1]
+    time_series = pd.Series(time_series, index=range(time_series.shape[0]))
+    return time_series.interpolate(method="linear").loc[min_days:max_days]
