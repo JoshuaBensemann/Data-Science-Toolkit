@@ -1,4 +1,5 @@
 import pandas as pd
+from statsmodels import robust
 
 
 def remove_outliers_iqr(df: pd.DataFrame, column: str):
@@ -25,3 +26,10 @@ def remove_outliers_percentile(
     upper_bound = df[column].quantile(upper_percentile / 100)
     filtered_df = df[(df[column] >= lower_bound) & (df[column] <= upper_bound)]
     return filtered_df
+
+def remove_outliers_modified_z(df, column, threshold=3.5):
+    median = df[column].median()
+    mad = robust.mad(df[column])
+    mod_z = 0.6745 * (df[column] - median) / mad
+    mask = mod_z.abs() <= threshold
+    return df.loc[mask].copy()
