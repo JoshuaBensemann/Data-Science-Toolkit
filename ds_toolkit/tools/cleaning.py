@@ -27,6 +27,7 @@ def remove_outliers_percentile(
     filtered_df = df[(df[column] >= lower_bound) & (df[column] <= upper_bound)]
     return filtered_df
 
+
 def remove_outliers_modified_z(df, column, threshold=3.5):
     median = df[column].median()
     mad = robust.mad(df[column])
