@@ -27,7 +27,7 @@ def ts_train_test_split(
     val_ids = rng.choice(
         remaining_ids, size=int(remaining_ids.shape[0] / 2), replace=False
     )
-    val_df = remainder.loc[remainder[split_col].isin(val_ids)].copy()
-    test_df = remainder.loc[~remainder[split_col].isin(val_ids)].copy()
+    val_df = remainder.loc[remainder[id_col].isin(val_ids)].copy()
+    test_df = remainder.loc[~remainder[id_col].isin(val_ids)].copy()
 
     return train_df, val_df, test_df
