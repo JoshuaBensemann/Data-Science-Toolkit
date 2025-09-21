@@ -1,5 +1,16 @@
-from .loaders import load_dataframe
-from .features import create_time_series
-from .utils import powerset, ts_train_test_split
+import importlib
+import pkgutil
 
-__all__ = ["create_time_series", "load_dataframe", "powerset", "ts_train_test_split"]
+# Optional: List submodules to be exposed via `from my_package import *`
+# This list is separate from the dynamic import and only affects star imports.
+__all__ = []
+
+# Dynamically import all submodules
+for loader, module_name, is_pkg in pkgutil.walk_packages(__path__):
+    # This ensures that both modules (is_pkg=False) and sub-packages (is_pkg=True) are imported.
+    full_module_name = f"{__name__}.{module_name}"
+    importlib.import_module(full_module_name)
+
+    # If using `__all__`, you can add the module name to it.
+    # The module has already been loaded, but this makes it available for star imports.
+    __all__.append(module_name)

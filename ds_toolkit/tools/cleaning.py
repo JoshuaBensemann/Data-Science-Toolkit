@@ -29,6 +29,7 @@ def remove_outliers_percentile(
 
 
 def remove_outliers_modified_z(df, column, threshold=3.5):
+    df = df.dropna(subset=[column]).copy()
     median = df[column].median()
     mad = robust.mad(df[column])
     mod_z = 0.6745 * (df[column] - median) / mad
